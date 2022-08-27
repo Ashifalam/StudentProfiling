@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AddStudentDetails</title>
+    <link rel="stylesheet" href="stylenew.css">
+</head>
+<body>
+    <div class="Container">
+        <!-- <center>
+        </center> -->
+        <center>
+        <div class="title"><h1>Personal details</h1></div></center>
+        <form action="#">
+            <div class="user-details">
+                <!-- USN -->
+                <div class="input-box">
+                    <span class="details">USN</span>
+                    <input id="usn" type="text" placeholder="Enter your USN" required>
+                </div>
+                <!-- first name -->
+                <div class="input-box">
+                    <span class="details">First Name</span>
+                    <input id="fname" type="text" placeholder="Enter your First Name" required>
+                </div>
+                <!-- last name -->
+                <div class="input-box">
+                    <span class="details">Last Name</span>
+                    <input id="lname" type="text" placeholder="Enter your Last Name" required>
+                </div>
+                <!-- Email -->
+                <div class="input-box">
+                    <span class="details">Email</span>
+                    <input id="email" type="text" placeholder="Enter your Email" required>
+                </div>
+                <!-- phone number -->
+                <div class="input-box">
+                    <span class="details">Phone Number</span>
+                    <input id="phone" type="number" size=10 placeholder="Enter your Number" required>
+                </div>
+
+                <!-- <div class="input-box">
+                    <span class="details">address</span>
+                    <input type="text" placeholder="Enter your Address" required>
+                </div> -->
+                <div class="input-box">
+                    <span class="details">DOB</span>
+                    <input id="dob" type="date" required>
+                </div>
+                <!-- gender -->
+                    <!-- <label for="Select Gender">Select Gender</label>
+                    <select name="Gender"id="gender">
+                        <option value=" ">---Choose option---</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Trans">Trans</option>
+                        </select> -->
+                        <label>Gender</label>
+                        <select id="gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                        </select>
+                        <!-- <div class="input-box">
+                    <span class="details">Hobbies</span>
+                    <input type="text" placeholder="Enter your Hobbies" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Internship</span>
+                    <input type="text" placeholder="Enter your Internship details" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Project</span>
+                    <input type="text" placeholder="Enter your Project details" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Skills</span>
+                    <input type="text" placeholder="Enter your Skills" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Results</span>
+                    <input type="text" placeholder="Enter your Sem to get result" required>
+                </div> -->
+            </div>
+           <!-- <div class="gender-details">
+            <input type="radio" name="gender" id="dot-1">
+            <input type="radio" name="gender" id="dot-2">
+            <input type="radio" name="gender" id="dot-3">
+            <span class="gender-details">Gender</span>
+            <div class="category">
+                <label for="dot-1">    
+                    <span class="dot one"></span>
+                    <span class="gender">Male</span>
+                </label>
+                <label for="dot-2">
+                    
+                    <span class="dot two"></span>
+                    <span class="gender">Female</span>
+                </label>
+                <label for="dot-3">
+                    
+                    <span class="dot three"></span>
+                    <span class="gender">other</span>
+                </label>
+            </div>
+           </div> -->
+           <div class="button1">
+            <input id="addstudent" type="submit" value="Add Student">
+           
+
+            <input id="show" type="submit" value="Show">
+    <br><br>
+           
+      
+            <input id="update" type="submit" value="Update">
+    
+        
+       
+            <input id="delete" type="submit" value="Delete">
+           </div> 
+
+    
+           
+           <!-- <button id="addstudent" >Add student</button> -->
+        </form>
+    </div>
+    
+<!----------------------------------------- imports & configuration ------------------------------------------------------>
+
+<script type="module">
+
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+    
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAGUU5OEvKOKig2s_q_P8RF-f4marXSFds",
+        authDomain: "student-profiling-system.firebaseapp.com",
+        databaseURL: "https://student-profiling-system-default-rtdb.firebaseio.com",
+        projectId: "student-profiling-system",
+        storageBucket: "student-profiling-system.appspot.com",
+        messagingSenderId: "1029258543682",
+        appId: "1:1029258543682:web:79e78b6cf4daefd041a3db"
+    };
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    
+    import {
+        getFirestore , doc , getDoc , setDoc , collection , addDoc , updateDoc , deleteDoc , deleteField
+    }
+    from "https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore.js";
+    
+    const db = getFirestore();
+    
+    // ----------------------------------references----------------------------------
+    
+    let Usn = document.getElementById("usn");
+    let Fname = document.getElementById("fname");
+    let Lname = document.getElementById("lname");
+    let Email = document.getElementById("email");
+    let Phone = document.getElementById("phone");
+    let Dob = document.getElementById("dob");
+    let Gender = document.getElementById("gender")
+
+    let Add = document.getElementById("addstudent");
+    let selBtn = document.getElementById("show");
+    let updBtn = document.getElementById("update");
+    let delBtn = document.getElementById("delete");
+    
+    //----------------------------adding document-------------------------------
+
+    async function AddDocument_CustomID(){
+        //alert("Function is running");
+        var ref = doc(db , "TheStudentslist" , Usn.value);
+        
+        const docRef = await setDoc(
+            ref, {
+                UsnOfStd: Usn.value,
+                FnameOfStd: Fname.value,
+                LnameOfStd: Lname.value,
+                EmailOfStd: Email.value,
+                PhoneOfStd: Phone.value,
+                DobOfStd: Dob.value,
+                GenderOfStd : Gender.value
+            }
+        )
+        .then(()=>{
+            alert("data added successfully");
+        })
+        .catch((error)=>{
+            alert("error :" + error);
+        });
+    }
+
+    // function g(){
+    //     alert(document.getElementById("gender"));
+    // }
+
+
+    // getting a document 
+    
+    async function GetDoc(){
+        var ref =doc(db,"TheStudentslist",usn.value);
+
+        const docSnap = await getDoc(ref);
+
+        if(docSnap.exists()){
+                    fname.value = docSnap.data().FnameOfStd;
+                    lname.value = docSnap.data().LnameOfStd;
+                    dob.value = docSnap.data().DobOfStd;
+                    email.value = docSnap.data().EmailOfStd;
+                    phone.value = docSnap.data().PhoneOfStd;
+                    gender.value = docSnap.data().GenderOfStd;
+                }
+        else{
+            alert("No such document");
+        }
+    }      
+    
+    // updating  a document
+
+    async function UpdatingFields(){
+        var ref=doc(db,"TheStudentslist",usn.value);
+
+        await updateDoc(
+            ref,{
+                FnameOfStd: fname.value,
+                LnameOfStd: lname.value,
+                EmailOfStd: email.value,
+                PhoneOfStd: phone.value,
+                DobOfStd: dob.value,
+                GenderOfStd : gender.value  
+            }
+        )
+        .then(()=>{
+            alert("Data added succesfully");
+        })
+        .catch((error)=>{
+            alert("error :"+error);
+        });
+    }   
+
+    //-------------------------Deleting a document------------------
+
+    async function DeletingDoc(){
+        var ref =doc(db,"TheStudentslist",usn.value);
+        const docSnap = await getDoc(ref);
+    
+        if(!docSnap.exists()){
+            alert("No such document");
+            return;
+        }
+        await deleteDoc(ref)
+        .then(()=>{
+            alert("Data deleted succesfully");
+        })
+        .catch((error)=>{
+            alert("Unsucesseful operation error :"+error);
+        });
+    } 
+ 
+    // test function
+
+    function g(){
+        alert("akfjb");
+    }
+    
+    // assign events to buttons
+
+ 
+
+//--------assign events to btns------------------------------------\
+
+    Add.addEventListener("click", AddDocument_CustomID);
+    selBtn.addEventListener("click",GetDoc);
+    updBtn.addEventListener("click",UpdatingFields);
+    delBtn.addEventListener("click", DeletingDoc);
+    //Add.addEventListener("click", g());
+
+  </script>
+
+  
+
+</body>
+</html>

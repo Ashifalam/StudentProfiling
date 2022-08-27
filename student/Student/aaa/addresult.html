@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <link rel="stylesheet" href="stylenew.css">
+</head>
+<body>
+    <div class="Container">
+        <center>
+        <div class="title"><h1>Result</h1></div></center>
+        <form action="#">
+            <div class="user-details">
+                <!-- USN -->
+                <div class="input-box">
+                    <span class="details">USN</span>
+                    <input type="text" id="rusn" placeholder="Enter your USN" required>
+                </div>
+                <!-- Semester -->
+                <div class="input-box">
+                    <span class="details">Semester</span>
+                    <input type="text" id="semester" placeholder="Enter your Semester" required>
+                </div>
+                <!-- Subject-Code -->
+                <div class="input-box">
+                    <span class="details">Subject-Code</span>
+                    <input type="text" id="subcode" placeholder="Subject-Code" required>
+                </div>
+                <!-- CGPA -->
+                <div class="input-box">
+                    <span class="details">Subject CGPA</span>
+                    <input type="text" id="cgpa" placeholder="Subject CGPA" required>
+                </div>
+                
+           <div class="button">
+            <input type="submit" id="addresult" value="Add result">
+
+           </div>
+</form>
+    </div>
+
+    <script type="module">
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAGUU5OEvKOKig2s_q_P8RF-f4marXSFds",
+            authDomain: "student-profiling-system.firebaseapp.com",
+            databaseURL: "https://student-profiling-system-default-rtdb.firebaseio.com",
+            projectId: "student-profiling-system",
+            storageBucket: "student-profiling-system.appspot.com",
+            messagingSenderId: "1029258543682",
+            appId: "1:1029258543682:web:79e78b6cf4daefd041a3db"
+        };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        
+        import {
+            getFirestore , doc , getDoc , setDoc , collection , addDoc , updateDoc , deleteDoc , deleteField
+        }
+        from "https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore.js";
+        
+        const db = getFirestore();
+        
+        // ----------------------------------references----------------------------------
+        
+        let Rusn = document.getElementById("rusn");
+        let Semester = document.getElementById("semester");
+        let Subcode = document.getElementById("subcode");
+        let Cgpa = document.getElementById("cgpa");
+
+        let Addresult = document.getElementById("addresult");
+        
+        //----------------------------adding document-------------------------------
+        
+        async function AddDocument_AutoID(){
+            alert("Function is running");
+            var ref = collection(db , "TheStudentslist");
+            
+            const docRef = await addDoc(
+                ref, {
+                    UsnOfStd: Usn.value,
+                    FnameOfStd: Usn.value,
+                    LnameOfStd: Fname.value,
+                    EmailOfStd: Lname.value,
+                    PhoneOfStd: Email.value,
+                    DobOfStd: Dob.value
+                }
+            )
+            .then(()=>{
+                alert("data added successfully");
+            })
+            .catch((error)=>{
+                alert("error :" + error);
+            });
+        }
+    
+        function g(){
+            alert("hello");
+        }
+    
+    //--------assign events to btns------------------------------------\
+    
+        Addresult.addEventListener("click", AddDocument_AutoID);
+    
+      </script>
+
+</body>
+</html>

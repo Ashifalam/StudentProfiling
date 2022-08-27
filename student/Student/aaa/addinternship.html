@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AddInternshipDetails</title>
+    <link rel="stylesheet" href="stylenew.css">
+</head>
+<body>
+    <div class="Container">
+        <center>
+        <div class="title"><h1>Internship</h1></div></center>
+        <form action="#">
+            <div class="user-details">
+                <!-- USN -->
+                <div class="input-box">
+                    <span class="details">USN</span>
+                    <input type="text" id="iusn" placeholder="Enter your USN" required>
+                </div>
+                <!-- company name -->
+                <div class="input-box">
+                    <span class="details">Company Name</span>
+                    <input type="text" id="company" placeholder="Enter internship company name" required>
+                </div>
+                <!-- date of joining -->
+                <div class="input-box">
+                    <span class="details">Date Of Joining</span>
+                    <input type="text" id="dateofjoin" placeholder="Enter your date of Joining" required>
+                </div>
+                <!-- date of completion -->
+                <div class="input-box">
+                    <span class="details">Date Of Completion</span>
+                    <input type="text" id="dateofcompletion" placeholder="Enter your Email" required>
+                </div>
+                <!-- role -->
+                <div class="input-box">
+                    <span class="details">Role</span>
+                    <input type="text" id="role" placeholder="Enter your Role" required>
+                </div>
+                
+           <div class="button">
+            <input type="submit" id="addinternship" value="Add Intership details">
+
+           </div>
+        </form>
+    </div>
+
+    <script type="module">
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAGUU5OEvKOKig2s_q_P8RF-f4marXSFds",
+            authDomain: "student-profiling-system.firebaseapp.com",
+            databaseURL: "https://student-profiling-system-default-rtdb.firebaseio.com",
+            projectId: "student-profiling-system",
+            storageBucket: "student-profiling-system.appspot.com",
+            messagingSenderId: "1029258543682",
+            appId: "1:1029258543682:web:79e78b6cf4daefd041a3db"
+        };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        
+        import {
+            getFirestore , doc , getDoc , setDoc , collection , addDoc , updateDoc , deleteDoc , deleteField
+        }
+        from "https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore.js";
+        
+        const db = getFirestore();
+        
+        // ----------------------------------references----------------------------------
+        
+        let Iusn = document.getElementById("iusn");
+        let Company = document.getElementById("company");
+        let Dateofjoin = document.getElementById("dateofjoin");
+        let Dateofcompletion = document.getElementById("dateofcompletion");
+        let Role = document.getElementById("role");
+
+        let Addinternship = document.getElementById("addinternship");
+        
+        //----------------------------adding document-------------------------------
+        
+        async function AddDocument_AutoID(){
+            alert("Function is running");
+            var ref = collection(db , "TheStudentslist");
+            
+            const docRef = await addDoc(
+                ref, {
+                    UsnOfStd: Usn.value,
+                    FnameOfStd: Usn.value,
+                    LnameOfStd: Fname.value,
+                    EmailOfStd: Lname.value,
+                    PhoneOfStd: Email.value,
+                    DobOfStd: Dob.value
+                }
+            )
+            .then(()=>{
+                alert("data added successfully");
+            })
+            .catch((error)=>{
+                alert("error :" + error);
+            });
+        }
+    
+        function g(){
+            alert("hello");
+        }
+    
+    //--------assign events to btns------------------------------------\
+    
+        Addinternship.addEventListener("click", AddDocument_AutoID);
+    
+      </script>
+
+</body>
+</html>
